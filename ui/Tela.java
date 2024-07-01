@@ -33,6 +33,18 @@ public class Tela {
                 clienteUI.setVisible(true);
             }
         });
+
+        relatorioGeral.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Relatorio relatorio = new Relatorio(cliente);
+                relatorio.setTitle("Relatório");
+                relatorio.setSize(800,600);
+                relatorio.setModal(true);
+                relatorio.setVisible(true);
+            }
+        });
+
         sair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
