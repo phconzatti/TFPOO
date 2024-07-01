@@ -11,7 +11,13 @@ public class Domestico extends Robo {
 
 	@Override
 	public double calculaLocacao(int dias) {
-		return 0;
+		if (nivel == 1){
+			return 10*dias;
+		} else if (nivel == 2){
+			return 20*dias;
+		} else {
+			return 50*dias;
+		}
 	}
 
 	public int getNivel() {
