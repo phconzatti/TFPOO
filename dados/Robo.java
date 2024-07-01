@@ -8,6 +8,8 @@ public abstract class Robo {
 
 	private double valorDiario;
 
+	private int dias;
+
 	public Robo(int id, String modelo, double valorDiario) {
 		this.id = id;
 		this.modelo = modelo;
@@ -39,6 +41,14 @@ public abstract class Robo {
 
 	public void setValorDiario(double valorDiario) {
 		this.valorDiario = valorDiario;
+	}
+
+	public int getDias() {
+		return dias;
+	}
+
+	public void setDias(int dias) {
+		this.dias = dias;
 	}
 
 	@Override

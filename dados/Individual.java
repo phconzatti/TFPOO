@@ -30,4 +30,5 @@ public class Individual extends Cliente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 }

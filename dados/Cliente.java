@@ -6,6 +6,8 @@ public abstract class Cliente {
 
 	private String nome;
 
+	private int quantidadeRobos;
+
 	public Cliente (int codigo, String nome){
 		this.codigo = codigo;
 		this.nome = nome;
@@ -28,6 +30,14 @@ public abstract class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public int getQuantidadeRobos() {
+		return quantidadeRobos;
+	}
+
+	public void setQuantidadeRobos(int quantidadeRobos) {
+		this.quantidadeRobos = quantidadeRobos;
 	}
 
 	@Override

@@ -19,8 +19,8 @@ public class Locacao {
 		this.dataFim = dataFim;
 	}
 
-	public double calculaValorFinal() {
-		return 0;
+	public double calculaValorFinal(Cliente c, Robo r) {
+		return c.calculaDesconto(c.getQuantidadeRobos())*r.calculaLocacao(r.getDias());
 	}
 
 	public int getNumero() {
