@@ -1,11 +1,13 @@
 package ui;
 
+import dados.Cliente;
 import dados.Empresarial;
 import dados.Individual;
 import dados.RegistroCliente;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class ClienteUI extends JDialog {
     private JPanel contentPane;
@@ -19,8 +21,8 @@ public class ClienteUI extends JDialog {
     private JTextArea exibeDados;
     RegistroCliente rc;
 
-    public ClienteUI() {
-        rc = new RegistroCliente();
+    public ClienteUI(RegistroCliente registro) {
+        rc = registro;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(adicionar);
@@ -91,8 +93,13 @@ public class ClienteUI extends JDialog {
         dispose();
     }
 
+    public RegistroCliente getRc(){
+        return rc;
+    }
+
     public static void main(String[] args) {
-        ClienteUI dialog = new ClienteUI();
+        RegistroCliente reg = new RegistroCliente();
+        ClienteUI dialog = new ClienteUI(reg);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

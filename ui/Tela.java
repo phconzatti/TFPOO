@@ -1,5 +1,7 @@
 package ui;
 
+import dados.RegistroCliente;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +19,14 @@ public class Tela {
     private JButton carrega;
     private JButton sair;
     private JPanel Painel;
+    private RegistroCliente cliente;
 
     public Tela() {
+        cliente = new RegistroCliente();
         cadastraCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ClienteUI clienteUI = new ClienteUI();
+                ClienteUI clienteUI = new ClienteUI(cliente);
                 clienteUI.setTitle("Cadastrar novo cliente");
                 clienteUI.setSize(800,600);
                 clienteUI.setModal(true);
