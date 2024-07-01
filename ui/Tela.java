@@ -1,10 +1,20 @@
 package ui;
 
+import com.google.gson.reflect.TypeToken;
+import dados.Cliente;
+import dados.Individual;
 import dados.RegistroCliente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+import com.google.gson.Gson;
+
 
 public class Tela {
     private JButton cadastraRobo;
@@ -42,6 +52,33 @@ public class Tela {
                 relatorio.setSize(800,600);
                 relatorio.setModal(true);
                 relatorio.setVisible(true);
+            }
+        });
+
+        salvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Cliente> salvaCliente = cliente.organizarLista();
+                Gson gson = new Gson();
+                String json = gson.toJson(salvaCliente);
+                try (FileWriter writer = new FileWriter("pessoas.json")) {
+                    writer.write(json);
+                } catch (IOException h) {
+                    h.printStackTrace();
+                }
+            }
+        });
+
+        carrega.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gson gson = new Gson();
+                try (FileReader reader = new FileReader("pessoas.json")) {
+                    Type pessoaListType = new TypeToken<List<Individual>>() {}.getType();
+                    List<Individual> pessoas = gson.fromJson(reader, pessoaListType);
+                } catch (IOException j) {
+                    j.printStackTrace();
+                }
             }
         });
 
