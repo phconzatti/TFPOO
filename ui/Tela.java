@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import com.google.gson.Gson;
+import dados.RegistroRobo;
 
 
 public class Tela {
@@ -30,9 +31,23 @@ public class Tela {
     private JButton sair;
     private JPanel Painel;
     private RegistroCliente cliente;
+    private RegistroRobo robo;
 
     public Tela() {
         cliente = new RegistroCliente();
+        robo = new RegistroRobo();
+
+        cadastraRobo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RoboUI roboUI = new RoboUI();
+                roboUI.setTitle("Cadastrar novo robô");
+                roboUI.setSize(800,600);
+                roboUI.setModal(true);
+                roboUI.setVisible(true);
+            }
+        });
+
         cadastraCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,6 +91,9 @@ public class Tela {
                 try (FileReader reader = new FileReader("pessoas.json")) {
                     Type pessoaListType = new TypeToken<List<Individual>>() {}.getType();
                     List<Individual> pessoas = gson.fromJson(reader, pessoaListType);
+                    for (int i = 0; i< pessoas.size(); i++){
+                        cliente.cadastraCliente(pessoas.get(i));
+                    }
                 } catch (IOException j) {
                     j.printStackTrace();
                 }
