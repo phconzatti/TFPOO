@@ -96,7 +96,6 @@ public class Tela {
         carrega.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gson gson = new Gson();
                 try (FileReader reader = new FileReader("cliente.json")) {
                     RuntimeTypeAdapterFactory<Cliente> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
                             .of(Cliente.class, "tipo")
@@ -112,7 +111,22 @@ public class Tela {
                 } catch (IOException j) {
                     j.printStackTrace();
                 }
-
+                try (FileReader reader = new FileReader("robo.json")) {
+                    RuntimeTypeAdapterFactory<Robo> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
+                            .of(Robo.class, "tipo")
+                            .registerSubtype(Domestico.class, "1")
+                            .registerSubtype(Industrial.class, "2")
+                            .registerSubtype(Agricola.class, "3");
+                    Gson gson2 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory)
+                            .create();
+                    Type roboListType = new TypeToken<List<Robo>>() {}.getType();
+                    List<Robo> roboLista = gson2.fromJson(reader, roboListType);
+                    for (int i = 0; i< roboLista.size(); i++){
+                        robo.cadastraRobo(roboLista.get(i));
+                    }
+                } catch (IOException j) {
+                    j.printStackTrace();
+                }
             }
         });
 

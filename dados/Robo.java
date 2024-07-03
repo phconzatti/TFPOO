@@ -2,6 +2,8 @@ package dados;
 
 public abstract class Robo {
 
+	private int tipo;//1 para domestico, 2 para industrial, 3 para agricola.
+
 	private int id;
 
 	private String modelo;
@@ -49,6 +51,14 @@ public abstract class Robo {
 
 	public void setDias(int dias) {
 		this.dias = dias;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override

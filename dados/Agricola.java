@@ -38,6 +38,6 @@ public class Agricola extends Robo {
 		return super.toString()+", Agricola, " +
 				"area= " + area +
 				", uso= " + uso +
-				";";
+				";\n";
 	}
 }

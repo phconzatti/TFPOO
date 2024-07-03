@@ -101,6 +101,7 @@ public class RoboUI extends JDialog {
                     exibeDados.append("Formato incorreto no campo 'Nível'.\n");
                 }
                 Domestico d = new Domestico(idTexto, modeloTexto, valorDiarioTexto, nivelTexto);
+                d.setTipo(1);
                 if (!rb.cadastraRobo(d)) {
                     exibeDados.append("Robô não cadastrado, ID repetido.\n");
                 } else {
@@ -111,6 +112,7 @@ public class RoboUI extends JDialog {
             if (industrial.isSelected()) {
                 String setorTexto = setor.getText();
                 Industrial i = new Industrial(idTexto, modeloTexto, valorDiarioTexto, setorTexto);
+                i.setTipo(2);
                 if (!rb.cadastraRobo(i)) {
                     exibeDados.append("Robô não cadastrado, ID repetido.\n");
                 } else {
@@ -128,6 +130,7 @@ public class RoboUI extends JDialog {
                     exibeDados.append("Formato incorreto no campo 'Área'.\n");
                 }
                 Agricola a = new Agricola(idTexto, modeloTexto, valorDiarioTexto, areaTexto, usoTexto);
+                a.setTipo(3);
                 if (!rb.cadastraRobo(a)) {
                     exibeDados.append("Robô não cadastrado, ID repetido.\n");
                 } else {

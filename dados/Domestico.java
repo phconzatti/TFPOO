@@ -32,6 +32,6 @@ public class Domestico extends Robo {
 	public String toString() {
 		return super.toString()+", Domestico, " +
 				"nivel= " + nivel +
-				";";
+				";\n";
 	}
 }
