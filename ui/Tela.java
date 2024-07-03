@@ -73,7 +73,12 @@ public class Tela {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Cliente> salvaCliente = cliente.organizarLista();
+                SalvarUI salvarUI = new SalvarUI(cliente, robo);
+                salvarUI.setTitle("Salvar dados");
+                salvarUI.setSize(800,600);
+                salvarUI.setModal(true);
+                salvarUI.setVisible(true);
+                /*List<Cliente> salvaCliente = cliente.organizarLista();
                 Gson gson = new Gson();
                 String json = gson.toJson(salvaCliente);
                 try (FileWriter writer = new FileWriter("cliente.json")) {
@@ -88,7 +93,7 @@ public class Tela {
                     writer.write(json2);
                 } catch (IOException h) {
                     h.printStackTrace();
-                }
+                }*/
 
             }
         });
@@ -96,37 +101,11 @@ public class Tela {
         carrega.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try (FileReader reader = new FileReader("cliente.json")) {
-                    RuntimeTypeAdapterFactory<Cliente> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
-                            .of(Cliente.class, "tipo")
-                            .registerSubtype(Individual.class, "1")
-                            .registerSubtype(Empresarial.class, "2");
-                    Gson gson2 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory)
-                            .create();
-                    Type pessoaListType = new TypeToken<List<Cliente>>() {}.getType();
-                    List<Cliente> pessoas = gson2.fromJson(reader, pessoaListType);
-                    for (int i = 0; i< pessoas.size(); i++){
-                        cliente.cadastraCliente(pessoas.get(i));
-                    }
-                } catch (IOException j) {
-                    j.printStackTrace();
-                }
-                try (FileReader reader = new FileReader("robo.json")) {
-                    RuntimeTypeAdapterFactory<Robo> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
-                            .of(Robo.class, "tipo")
-                            .registerSubtype(Domestico.class, "1")
-                            .registerSubtype(Industrial.class, "2")
-                            .registerSubtype(Agricola.class, "3");
-                    Gson gson2 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory)
-                            .create();
-                    Type roboListType = new TypeToken<List<Robo>>() {}.getType();
-                    List<Robo> roboLista = gson2.fromJson(reader, roboListType);
-                    for (int i = 0; i< roboLista.size(); i++){
-                        robo.cadastraRobo(roboLista.get(i));
-                    }
-                } catch (IOException j) {
-                    j.printStackTrace();
-                }
+                CarregarUI carregarUI = new CarregarUI(cliente, robo);
+                carregarUI.setTitle("Carregar dados");
+                carregarUI.setSize(800,600);
+                carregarUI.setModal(true);
+                carregarUI.setVisible(true);
             }
         });
 
