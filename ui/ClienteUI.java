@@ -1,28 +1,31 @@
 package ui;
 
-import dados.Cliente;
 import dados.Empresarial;
 import dados.Individual;
 import dados.RegistroCliente;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class ClienteUI extends JDialog {
     private JPanel contentPane;
     private JButton adicionar;
     private JButton buttonCancel;
     private JTextField codigo;
-    private JTextField nome;
     private JTextField anoCpf;
+    private JTextField nome;
     private JRadioButton individual;
     private JRadioButton empresarial;
     private JTextArea exibeDados;
+    private JButton limpar;
     RegistroCliente rc;
+    private ButtonGroup b;
 
     public ClienteUI(RegistroCliente registro) {
         rc = registro;
+        b = new ButtonGroup();
+        b.add(empresarial);
+        b.add(individual);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(adicionar);
@@ -39,7 +42,6 @@ public class ClienteUI extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -47,12 +49,22 @@ public class ClienteUI extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        limpar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                codigo.setText("");
+                anoCpf.setText("");
+                nome.setText("");
+                exibeDados.setText("");
+                b.clearSelection();
+            }
+        });
     }
 
     private void onOK() {
@@ -61,7 +73,7 @@ public class ClienteUI extends JDialog {
             String nomeTexto = nome.getText();
 
             if (individual.isSelected()) {
-                String cpfTexto = anoCpf.getText();
+                String cpfTexto = nome.getText();
                 Individual i = new Individual(codigoTexto, nomeTexto, cpfTexto);
 
                 if (!rc.cadastraCliente(i)) {
@@ -83,13 +95,12 @@ public class ClienteUI extends JDialog {
                 }
             }
         } catch (NumberFormatException nfe){
-            exibeDados.append("Formato errado em dado de entrada. Verificar se o código e/ou ano são números inteiros");
+            exibeDados.append("Formato errado em dado de entrada. Verificar se o código e/ou ano são números inteiros.\n");
         }
 
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

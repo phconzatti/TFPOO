@@ -13,7 +13,7 @@ public class RegistroRobo {
             lista = new ArrayList<>();
         }
 
-        public boolean cadastraCliente(Robo robo) {
+        public boolean cadastraRobo(Robo robo) {
             if (lista.isEmpty()) {
                 lista.add(robo);
                 return true;

@@ -2,6 +2,8 @@ package ui;
 
 import dados.Cliente;
 import dados.RegistroCliente;
+import dados.RegistroRobo;
+import dados.Robo;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,7 +15,7 @@ public class Relatorio extends JDialog {
     private JTextArea relatorio;
     private JButton imprimir;
 
-    public Relatorio(RegistroCliente cliente) {
+    public Relatorio(RegistroCliente cliente, RegistroRobo robo) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -32,11 +34,18 @@ public class Relatorio extends JDialog {
                     sb.append(c);
                 }
                 String exibir = sb.toString();
-                relatorio.setText(exibir);
+
+                List<Robo> reg2 = robo.organizarLista();
+                StringBuilder sb2 = new StringBuilder();
+                for (Robo r : reg2){
+                    sb2.append(r);
+                }
+                String exibir2 = sb2.toString();
+
+                relatorio.setText("Clientes: \n"+exibir+"\nRobôs: \n"+exibir2);
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -44,7 +53,6 @@ public class Relatorio extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -53,13 +61,13 @@ public class Relatorio extends JDialog {
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
     public static void main(String[] args) {
         RegistroCliente rc = new RegistroCliente();
-        Relatorio dialog = new Relatorio(rc);
+        RegistroRobo rb = new RegistroRobo();
+        Relatorio dialog = new Relatorio(rc, rb);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

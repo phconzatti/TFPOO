@@ -1,9 +1,7 @@
 package ui;
 
 import com.google.gson.reflect.TypeToken;
-import dados.Cliente;
-import dados.Individual;
-import dados.RegistroCliente;
+import dados.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import com.google.gson.Gson;
-import dados.RegistroRobo;
 
 
 public class Tela {
@@ -40,7 +37,7 @@ public class Tela {
         cadastraRobo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RoboUI roboUI = new RoboUI();
+                RoboUI roboUI = new RoboUI(robo);
                 roboUI.setTitle("Cadastrar novo robô");
                 roboUI.setSize(800,600);
                 roboUI.setModal(true);
@@ -62,7 +59,7 @@ public class Tela {
         relatorioGeral.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Relatorio relatorio = new Relatorio(cliente);
+                Relatorio relatorio = new Relatorio(cliente, robo);
                 relatorio.setTitle("Relatório");
                 relatorio.setSize(800,600);
                 relatorio.setModal(true);
@@ -76,11 +73,20 @@ public class Tela {
                 List<Cliente> salvaCliente = cliente.organizarLista();
                 Gson gson = new Gson();
                 String json = gson.toJson(salvaCliente);
-                try (FileWriter writer = new FileWriter("pessoas.json")) {
+                try (FileWriter writer = new FileWriter("cliente.json")) {
                     writer.write(json);
                 } catch (IOException h) {
                     h.printStackTrace();
                 }
+                List<Robo> salvaRobo = robo.organizarLista();
+                Gson gson2 = new Gson();
+                String json2 = gson.toJson(salvaRobo);
+                try (FileWriter writer = new FileWriter("robo.json")) {
+                    writer.write(json2);
+                } catch (IOException h) {
+                    h.printStackTrace();
+                }
+
             }
         });
 
@@ -88,15 +94,16 @@ public class Tela {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gson gson = new Gson();
-                try (FileReader reader = new FileReader("pessoas.json")) {
-                    Type pessoaListType = new TypeToken<List<Individual>>() {}.getType();
-                    List<Individual> pessoas = gson.fromJson(reader, pessoaListType);
+                try (FileReader reader = new FileReader("cliente.json")) {
+                    Type pessoaListType = new TypeToken<List<Cliente>>() {}.getType();
+                    List<Cliente> pessoas = gson.fromJson(reader, pessoaListType);
                     for (int i = 0; i< pessoas.size(); i++){
                         cliente.cadastraCliente(pessoas.get(i));
                     }
                 } catch (IOException j) {
                     j.printStackTrace();
                 }
+
             }
         });
 
