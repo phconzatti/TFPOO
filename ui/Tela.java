@@ -78,23 +78,6 @@ public class Tela {
                 salvarUI.setSize(800,600);
                 salvarUI.setModal(true);
                 salvarUI.setVisible(true);
-                /*List<Cliente> salvaCliente = cliente.organizarLista();
-                Gson gson = new Gson();
-                String json = gson.toJson(salvaCliente);
-                try (FileWriter writer = new FileWriter("cliente.json")) {
-                    writer.write(json);
-                } catch (IOException h) {
-                    h.printStackTrace();
-                }
-                List<Robo> salvaRobo = robo.organizarLista();
-                Gson gson2 = new Gson();
-                String json2 = gson.toJson(salvaRobo);
-                try (FileWriter writer = new FileWriter("robo.json")) {
-                    writer.write(json2);
-                } catch (IOException h) {
-                    h.printStackTrace();
-                }*/
-
             }
         });
 
