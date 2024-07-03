@@ -1,13 +1,17 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class RegistroLocacao {
     private List<Locacao> lista;
+    private Queue<Locacao> fila;
 
     public RegistroLocacao (){
         lista = new ArrayList<>();
+        fila = new LinkedList<>();
     }
 
     public boolean cadastraLocacao(Locacao locacao){
@@ -23,6 +27,7 @@ public class RegistroLocacao {
             }
         }
         lista.add(locacao);
+        fila.add(locacao);
         return true;
     }
 }

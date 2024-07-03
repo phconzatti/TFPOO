@@ -1,5 +1,8 @@
 package ui;
 
+import dados.RegistroCliente;
+import dados.RegistroRobo;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -8,7 +11,7 @@ public class LocacaoUI extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public LocacaoUI() {
+    public LocacaoUI(RegistroCliente cliente, RegistroRobo robo) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -32,7 +35,6 @@ public class LocacaoUI extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -45,7 +47,9 @@ public class LocacaoUI extends JDialog {
     }
 
     public static void main(String[] args) {
-        LocacaoUI dialog = new LocacaoUI();
+        RegistroCliente rc = new RegistroCliente();
+        RegistroRobo rb = new RegistroRobo();
+        LocacaoUI dialog = new LocacaoUI(rc, rb);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
