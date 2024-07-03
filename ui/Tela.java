@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+import com.poo.typeadapters.RuntimeTypeAdapterFactory;
 
 
 public class Tela {
@@ -95,8 +98,14 @@ public class Tela {
             public void actionPerformed(ActionEvent e) {
                 Gson gson = new Gson();
                 try (FileReader reader = new FileReader("cliente.json")) {
-                    Type pessoaListType = new TypeToken<List<Individual>>() {}.getType();
-                    List<Individual> pessoas = gson.fromJson(reader, pessoaListType);
+                    RuntimeTypeAdapterFactory<Cliente> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
+                            .of(Cliente.class, "tipo")
+                            .registerSubtype(Individual.class, "1")
+                            .registerSubtype(Empresarial.class, "2");
+                    Gson gson2 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory)
+                            .create();
+                    Type pessoaListType = new TypeToken<List<Cliente>>() {}.getType();
+                    List<Cliente> pessoas = gson2.fromJson(reader, pessoaListType);
                     for (int i = 0; i< pessoas.size(); i++){
                         cliente.cadastraCliente(pessoas.get(i));
                     }

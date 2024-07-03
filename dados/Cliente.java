@@ -2,6 +2,8 @@ package dados;
 
 public abstract class Cliente {
 
+	private int tipo; //1 para individual, 2 para empresarial.
+
 	private int codigo;
 
 	private String nome;
@@ -38,6 +40,14 @@ public abstract class Cliente {
 
 	public void setQuantidadeRobos(int quantidadeRobos) {
 		this.quantidadeRobos = quantidadeRobos;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class ClienteUI extends JDialog {
             if (individual.isSelected()) {
                 String cpfTexto = nome.getText();
                 Individual i = new Individual(codigoTexto, nomeTexto, cpfTexto);
-
+                i.setTipo(1);
                 if (!rc.cadastraCliente(i)) {
                     exibeDados.append("Cliente não cadastrado, código repetido.\n");
                 } else {
@@ -87,6 +87,7 @@ public class ClienteUI extends JDialog {
             if (empresarial.isSelected()) {
                 int anoTexto = Integer.parseInt(anoCpf.getText());
                 Empresarial empresa = new Empresarial(codigoTexto, nomeTexto, anoTexto);
+                empresa.setTipo(2);
                 if (!rc.cadastraCliente(empresa)) {
                     exibeDados.append("Cliente não cadastrado, código repetido.\n");
                 } else {
