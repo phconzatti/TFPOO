@@ -73,7 +73,7 @@ public class ClienteUI extends JDialog {
             String nomeTexto = nome.getText();
 
             if (individual.isSelected()) {
-                String cpfTexto = nome.getText();
+                String cpfTexto = anoCpf.getText();
                 Individual i = new Individual(codigoTexto, nomeTexto, cpfTexto);
                 i.setTipo(1);
                 if (!rc.cadastraCliente(i)) {
