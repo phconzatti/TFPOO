@@ -36,8 +36,8 @@ public class Agricola extends Robo {
 	@Override
 	public String toString() {
 		return super.toString()+", Agricola, " +
-				"area=" + area +
-				", uso='" + uso +
-				"}\n";
+				"area= " + area +
+				", uso= " + uso +
+				";";
 	}
 }

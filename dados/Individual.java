@@ -20,7 +20,7 @@ public class Individual extends Cliente {
 
 	@Override
 	public String toString() {
-		return super.toString()+ ", Individual, " + "CPF= " + cpf + "}\n";
+		return super.toString()+ " Individual, " + "CPF= " + cpf + ";";
 	}
 
 	public String getCpf() {

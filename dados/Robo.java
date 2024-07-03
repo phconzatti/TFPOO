@@ -53,9 +53,8 @@ public abstract class Robo {
 
 	@Override
 	public String toString() {
-		return "Robo{" +
-				"id=" + id +
-				", modelo='" + modelo + '\'' +
-				", valorDiario=" + valorDiario;
+		return "id= " + id +
+				", modelo= " + modelo +
+				", valorDiario= " + valorDiario;
 	}
 }

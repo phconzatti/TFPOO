@@ -95,8 +95,8 @@ public class Tela {
             public void actionPerformed(ActionEvent e) {
                 Gson gson = new Gson();
                 try (FileReader reader = new FileReader("cliente.json")) {
-                    Type pessoaListType = new TypeToken<List<Cliente>>() {}.getType();
-                    List<Cliente> pessoas = gson.fromJson(reader, pessoaListType);
+                    Type pessoaListType = new TypeToken<List<Individual>>() {}.getType();
+                    List<Individual> pessoas = gson.fromJson(reader, pessoaListType);
                     for (int i = 0; i< pessoas.size(); i++){
                         cliente.cadastraCliente(pessoas.get(i));
                     }
