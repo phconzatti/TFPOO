@@ -8,6 +8,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class LocacaoUI extends JDialog {
@@ -59,35 +62,46 @@ public class LocacaoUI extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int num = Integer.parseInt(numero.getText());
-                    int dataI = Integer.parseInt(dataInicio.getText());
-                    int dataF = Integer.parseInt(dataFinal.getText());
-                    String dataStr = String.format("%08d", dataI);
-                    String dataStr2 = String.format("%08d", dataF);
-                    SimpleDateFormat dataIFormatada = new SimpleDateFormat("ddMMyyyy");
-                    Date data = dataIFormatada.parse(dataStr);
-                    Date dataFim = dataIFormatada.parse(dataStr2);
-                    Locacao l = new Locacao(num,Status.CADASTRADA, data, dataF);
-                    if (!rl.cadastraLocacao(l)){
-                        exibeDados.setText("Locação não cadastrada, número repetido.");
-                    } else {
-                        exibeDados.setText("Locação cadastrada com sucesso.");
-                        l.setCliente(cliente.getLista().get(indexCliente));
-                        cliente.getLista().get(indexCliente).setQuantidadeRobos(cliente.getLista().get(indexCliente).getQuantidadeRobos() + 1);
-                        l.setRobo(roboDisponivel.getLista().get(indexRobo));
-                        l.calculaValorFinal(cliente.getLista().get(indexCliente), roboDisponivel.getLista().get(indexRobo));
-                        roboDisponivel.getLista().remove(indexRobo);
-                        Robo[] roboArray = new Robo[roboDisponivel.getLista().size()];
-                        roboArray = roboDisponivel.getLista().toArray(roboArray);
-                        listaRobos = new JList<>(roboArray);
-                        scrollRobos.setViewportView(listaRobos);
-                        rl.cadastraLocacao(l);
+                if (cliente.getLista().isEmpty()) {
+                    exibeDados.setText("Não há clientes cadastrados.");
+                } else if (roboDisponivel.getLista().isEmpty()) {
+                    exibeDados.setText("Não há robôs cadastrados.");
+                } else {
+                    try {
+                        int num = Integer.parseInt(numero.getText());
+                        int dataI = Integer.parseInt(dataInicio.getText());
+                        int dataF = Integer.parseInt(dataFinal.getText());
+                        String dataStr = String.format("%08d", dataI);
+                        String dataStr2 = String.format("%08d", dataF);
+                        SimpleDateFormat dataIFormatada = new SimpleDateFormat("ddMMyyyy");
+                        Date data = dataIFormatada.parse(dataStr);
+                        Date dataFim = dataIFormatada.parse(dataStr2);
+                        LocalDate localDate1 = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        LocalDate localDate2 = dataFim.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        int numDias = (int) ChronoUnit.DAYS.between(localDate1, localDate2);
+                        Locacao l = new Locacao(num, Status.CADASTRADA, data, dataF);
+                        l.setTotalDias(numDias);
+                        if (!rl.cadastraLocacao(l)) {
+                            exibeDados.setText("Locação não cadastrada, número repetido.");
+                        } else {
+                            exibeDados.setText("Locação cadastrada com sucesso.");
+                            l.setCliente(cliente.getLista().get(indexCliente));
+                            cliente.getLista().get(indexCliente).setQuantidadeRobos(cliente.getLista().get(indexCliente).getQuantidadeRobos() + 1);
+                            l.setRobo(roboDisponivel.getLista().get(indexRobo));
+                            roboDisponivel.getLista().get(indexRobo).setDias(numDias);
+                            l.calculaValorFinal(cliente.getLista().get(indexCliente), roboDisponivel.getLista().get(indexRobo));
+                            roboDisponivel.getLista().remove(indexRobo);
+                            Robo[] roboArray = new Robo[roboDisponivel.getLista().size()];
+                            roboArray = roboDisponivel.getLista().toArray(roboArray);
+                            listaRobos = new JList<>(roboArray);
+                            scrollRobos.setViewportView(listaRobos);
+                            rl.cadastraLocacao(l);
+                        }
+                    } catch (NumberFormatException nfe) {
+                        exibeDados.setText("ERRO! Verifique os campos e insira os dados no formato correto.");
+                    } catch (ParseException pe) {
+                        exibeDados.setText("ERRO! Confira os dados inseridos nos campos de datas.");
                     }
-                } catch (NumberFormatException nfe){
-                    exibeDados.setText("ERRO! Verifique os campos e insira os dados no formato correto.");
-                } catch (ParseException pe){
-                    exibeDados.setText("ERRO! Confira os dados inseridos nos campos de datas.");
                 }
             }
         });

@@ -103,15 +103,11 @@ public class Locacao {
 
 	@Override
 	public String toString() {
-		return "Locacao{" +
-				"cliente=" + cliente +
-				", robo=" + robo +
+		return	"Número="+numero+
+				", cliente=" + cliente.getNome() +
+				", robo=" + robo.getId() +
 				", valorFinal=" + valorFinal +
 				", totalDias=" + totalDias +
-				", numero=" + numero +
-				", situacao=" + situacao +
-				", dataInicio=" + dataInicio +
-				", dataFim=" + dataFim +
-				'}';
+				", situacao=" + situacao+"\n";
 	}
 }
