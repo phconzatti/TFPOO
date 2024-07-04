@@ -88,7 +88,7 @@ public class Tela {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SalvarUI salvarUI = new SalvarUI(cliente, robo);
+                SalvarUI salvarUI = new SalvarUI(cliente, robo, locacao);
                 salvarUI.setTitle("Salvar dados");
                 salvarUI.setSize(800,600);
                 salvarUI.setModal(true);
@@ -99,7 +99,7 @@ public class Tela {
         carrega.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarregarUI carregarUI = new CarregarUI(cliente, robo, roboDisponivel);
+                CarregarUI carregarUI = new CarregarUI(cliente, robo, roboDisponivel, locacao);
                 carregarUI.setTitle("Carregar dados");
                 carregarUI.setSize(800,600);
                 carregarUI.setModal(true);

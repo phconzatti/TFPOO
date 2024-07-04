@@ -130,9 +130,7 @@ public class RoboUI extends JDialog {
                 try {
                     areaTexto = Double.parseDouble(area.getText());
                     usoTexto = uso.getText();
-                } catch (NumberFormatException nfe3){
-                    exibeDados.append("Formato incorreto no campo 'Área'.\n");
-                }
+
                 Agricola a = new Agricola(idTexto, modeloTexto, valorDiarioTexto, areaTexto, usoTexto);
                 a.setTipo(3);
                 if (!rb.cadastraRobo(a)) {
@@ -142,7 +140,9 @@ public class RoboUI extends JDialog {
                     rb.cadastraRobo(a);
                     rd.cadastraRobo(a);
                 }
-
+                } catch (NumberFormatException nfe3){
+                    exibeDados.append("Formato incorreto no campo 'Área'.\n");
+                }
             }
         }
     }

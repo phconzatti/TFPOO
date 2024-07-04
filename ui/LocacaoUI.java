@@ -85,9 +85,9 @@ public class LocacaoUI extends JDialog {
                             exibeDados.setText("Locação não cadastrada, número repetido.");
                         } else {
                             exibeDados.setText("Locação cadastrada com sucesso.");
-                            l.setCliente(cliente.getLista().get(indexCliente));
+                            l.setCliente(cliente.getLista().get(indexCliente).getNome());
                             cliente.getLista().get(indexCliente).setQuantidadeRobos(cliente.getLista().get(indexCliente).getQuantidadeRobos() + 1);
-                            l.setRobo(roboDisponivel.getLista().get(indexRobo));
+                            l.setRobo(roboDisponivel.getLista().get(indexRobo).getId());
                             roboDisponivel.getLista().get(indexRobo).setDias(numDias);
                             l.calculaValorFinal(cliente.getLista().get(indexCliente), roboDisponivel.getLista().get(indexRobo));
                             roboDisponivel.getLista().remove(indexRobo);

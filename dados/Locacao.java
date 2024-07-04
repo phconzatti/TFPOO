@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Locacao {
 
-	private Cliente cliente;
+	private String cliente;
 
-	private Robo robo;
+	private int robo;
 
 	private double valorFinal;
 
@@ -26,7 +26,7 @@ public class Locacao {
 		this.situacao = situacao;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
-		robo = null;
+		robo = 0;
 		cliente = null;
 	}
 
@@ -83,19 +83,19 @@ public class Locacao {
 		this.dataFim = dataFim;
 	}
 
-	public Cliente getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cLiente) {
+	public void setCliente(String cLiente) {
 		this.cliente = cLiente;
 	}
 
-	public Robo getRobo() {
+	public int getRobo() {
 		return robo;
 	}
 
-	public void setRobo(Robo robo) {
+	public void setRobo(int robo) {
 		this.robo = robo;
 	}
 
@@ -104,8 +104,8 @@ public class Locacao {
 	@Override
 	public String toString() {
 		return	"Número="+numero+
-				", cliente=" + cliente.getNome() +
-				", robo=" + robo.getId() +
+				", cliente=" + cliente +
+				", robo=" + robo +
 				", valorFinal=" + valorFinal +
 				", totalDias=" + totalDias +
 				", situacao=" + situacao+"\n";

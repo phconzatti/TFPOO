@@ -1,10 +1,7 @@
 package ui;
 
 import com.google.gson.Gson;
-import dados.Cliente;
-import dados.RegistroCliente;
-import dados.RegistroRobo;
-import dados.Robo;
+import dados.*;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,7 +17,7 @@ public class SalvarUI extends JDialog {
     private JTextArea exibeDados;
     private String arquivoNome = null;
 
-    public SalvarUI(RegistroCliente cliente, RegistroRobo robo) {
+    public SalvarUI(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -43,6 +40,14 @@ public class SalvarUI extends JDialog {
                         writer.write(json2);
                     } catch (IOException h) {
                         h.printStackTrace();
+                    }
+                    List<Locacao> salvaLocacao = locacao.getLista();
+                    Gson gson3 = new Gson();
+                    String json3 = gson.toJson(salvaLocacao);
+                    try (FileWriter writer = new FileWriter(arquivoNome + "-LOCACAO.json")) {
+                    writer.write(json3);
+                    } catch (IOException h) {
+                    h.printStackTrace();
                     }
                     exibeDados.append("Dados salvos com sucesso!");
                 }
@@ -73,9 +78,10 @@ public class SalvarUI extends JDialog {
     }
 
     public static void main(String[] args) {
+        RegistroLocacao rl = new RegistroLocacao();
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
-        SalvarUI dialog = new SalvarUI(rc, rb);
+        SalvarUI dialog = new SalvarUI(rc, rb, rl);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

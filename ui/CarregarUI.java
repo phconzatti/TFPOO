@@ -22,7 +22,7 @@ public class CarregarUI extends JDialog {
     private JTextField nomeArquivo;
     private String nome;
 
-    public CarregarUI(RegistroCliente cliente, RegistroRobo robo, RegistroRobo roboDisponivel) {
+    public CarregarUI(RegistroCliente cliente, RegistroRobo robo, RegistroRobo roboDisponivel, RegistroLocacao locacao) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -41,6 +41,7 @@ public class CarregarUI extends JDialog {
                     List<Cliente> pessoas = gson2.fromJson(reader, pessoaListType);
                     for (int i = 0; i< pessoas.size(); i++){
                         cliente.cadastraCliente(pessoas.get(i));
+
                     }
                 FileReader reader1 = new FileReader(nome+"-ROBOS.json");
                     RuntimeTypeAdapterFactory<Robo> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory
@@ -57,6 +58,19 @@ public class CarregarUI extends JDialog {
                         robo.cadastraRobo(roboLista.get(i));
                         roboDisponivel.cadastraRobo(roboLista.get(i));
                     }
+
+                    FileReader reader2 = new FileReader(nome+"-LOCACAO.json");
+                    RuntimeTypeAdapterFactory<Locacao> runtimeTypeAdapterFactory2 = RuntimeTypeAdapterFactory
+                            .of(Locacao.class, "numero");
+                    Gson gson3 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory1)
+                            .create();
+                    java.lang.reflect.Type locacaoListType = new TypeToken<List<Locacao>>() {
+                    }.getType();
+                    List<Locacao> locacaoLista = gson.fromJson(reader2, locacaoListType);
+                    for (int i = 0; i < locacaoLista.size(); i++) {
+                        locacao.cadastraLocacao(locacaoLista.get(i));
+                    }
+
                     exibeDados.setText("Dados carregados com sucesso!");
                 } catch (FileNotFoundException f){
                     exibeDados.setText("Arquivo inexistente.");
@@ -94,10 +108,11 @@ public class CarregarUI extends JDialog {
 
 
     public static void main(String[] args) {
+        RegistroLocacao rl = new RegistroLocacao();
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
         RegistroRobo rd = new RegistroRobo();
-        CarregarUI dialog = new CarregarUI(rc, rb, rd);
+        CarregarUI dialog = new CarregarUI(rc, rb, rd, rl);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
