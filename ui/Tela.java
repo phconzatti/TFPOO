@@ -41,6 +41,13 @@ public class Tela {
         robo = new RegistroRobo();
         locacao = new RegistroLocacao();
 
+        consultaLocacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         cadastraLocacao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
