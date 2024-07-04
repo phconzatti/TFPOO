@@ -25,13 +25,15 @@ public class RoboUI extends JDialog {
     private JTextArea exibeDados;
     private JButton limpar;
     RegistroRobo rb;
+    RegistroRobo rd;
     ButtonGroup b;
 
-    public RoboUI(RegistroRobo registro) {
+    public RoboUI(RegistroRobo registro, RegistroRobo registroDisponivel) {
         b = new ButtonGroup();
         b.add(domestico);
         b.add(industrial);
         b.add(agricola);
+        rd = registroDisponivel;
         rb = registro;
         setContentPane(contentPane);
         setModal(true);
@@ -107,6 +109,7 @@ public class RoboUI extends JDialog {
                 } else {
                     exibeDados.append("Robô cadastrado com sucesso.\n");
                     rb.cadastraRobo(d);
+                    rd.cadastraRobo(d);
                 }
             }
             if (industrial.isSelected()) {
@@ -118,6 +121,7 @@ public class RoboUI extends JDialog {
                 } else {
                     exibeDados.append("Robô cadastrado com sucesso.\n");
                     rb.cadastraRobo(i);
+                    rd.cadastraRobo(i);
                 }
             }
             if (agricola.isSelected()) {
@@ -136,6 +140,7 @@ public class RoboUI extends JDialog {
                 } else {
                     exibeDados.append("Robô cadastrado com sucesso.\n");
                     rb.cadastraRobo(a);
+                    rd.cadastraRobo(a);
                 }
 
             }
@@ -150,9 +155,14 @@ public class RoboUI extends JDialog {
         return rb;
     }
 
+    public RegistroRobo getRd(){
+        return rd;
+    }
+
     public static void main(String[] args) {
+        RegistroRobo registroRobo = new RegistroRobo();
         RegistroRobo reg = new RegistroRobo();
-        RoboUI dialog = new RoboUI(reg);
+        RoboUI dialog = new RoboUI(reg, registroRobo);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

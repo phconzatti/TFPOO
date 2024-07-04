@@ -32,15 +32,30 @@ public class Tela {
     private JPanel Painel;
     private RegistroCliente cliente;
     private RegistroRobo robo;
+    private RegistroRobo roboDisponivel;
+    private RegistroLocacao locacao;
 
     public Tela() {
+        roboDisponivel = new RegistroRobo();
         cliente = new RegistroCliente();
         robo = new RegistroRobo();
+        locacao = new RegistroLocacao();
+
+        cadastraLocacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocacaoUI locacaoUI = new LocacaoUI(cliente, robo, roboDisponivel, locacao);
+                locacaoUI.setTitle("Cadastrar nova locação");
+                locacaoUI.setSize(800,600);
+                locacaoUI.setModal(true);
+                locacaoUI.setVisible(true);
+            }
+        });
 
         cadastraRobo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RoboUI roboUI = new RoboUI(robo);
+                RoboUI roboUI = new RoboUI(robo, roboDisponivel);
                 roboUI.setTitle("Cadastrar novo robô");
                 roboUI.setSize(800,600);
                 roboUI.setModal(true);
@@ -84,7 +99,7 @@ public class Tela {
         carrega.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarregarUI carregarUI = new CarregarUI(cliente, robo);
+                CarregarUI carregarUI = new CarregarUI(cliente, robo, roboDisponivel);
                 carregarUI.setTitle("Carregar dados");
                 carregarUI.setSize(800,600);
                 carregarUI.setModal(true);

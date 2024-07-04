@@ -22,7 +22,7 @@ public class CarregarUI extends JDialog {
     private JTextField nomeArquivo;
     private String nome;
 
-    public CarregarUI(RegistroCliente cliente, RegistroRobo robo) {
+    public CarregarUI(RegistroCliente cliente, RegistroRobo robo, RegistroRobo roboDisponivel) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -55,6 +55,7 @@ public class CarregarUI extends JDialog {
                     List<Robo> roboLista = gson.fromJson(reader1, roboListType);
                     for (int i = 0; i < roboLista.size(); i++) {
                         robo.cadastraRobo(roboLista.get(i));
+                        roboDisponivel.cadastraRobo(roboLista.get(i));
                     }
                     exibeDados.setText("Dados carregados com sucesso!");
                 } catch (FileNotFoundException f){
@@ -95,7 +96,8 @@ public class CarregarUI extends JDialog {
     public static void main(String[] args) {
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
-        CarregarUI dialog = new CarregarUI(rc, rb);
+        RegistroRobo rd = new RegistroRobo();
+        CarregarUI dialog = new CarregarUI(rc, rb, rd);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
