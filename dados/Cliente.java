@@ -55,4 +55,9 @@ public abstract class Cliente {
 		return	"codigo= " + codigo +
 				", nome= " + nome + " ,";
 	}
+
+	public String toString2(){
+		return	"codigo= " + codigo +
+				", nome= " + nome + " ,";
+	}
 }

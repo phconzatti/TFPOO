@@ -33,4 +33,9 @@ public class Empresarial extends Cliente {
 		return super.toString()+"Empresarial, " +
 				"ano=" + ano+";\n";
 	}
+
+	public String toString2(){
+		return super.toString2()+"Empresarial, " +
+				"ano=" + ano;
+	}
 }

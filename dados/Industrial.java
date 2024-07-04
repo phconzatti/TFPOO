@@ -29,4 +29,9 @@ public class Industrial extends Robo {
 				"setor= " + setor  +
 				";\n";
 	}
+
+	public String toString2(){
+		return super.toString2()+", Industrial, " +
+				"setor= " + setor;
+	}
 }

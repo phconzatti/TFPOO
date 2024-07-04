@@ -44,7 +44,11 @@ public class Tela {
         consultaLocacao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ConsultaLocacaoUI consultaLocacaoUI = new ConsultaLocacaoUI(cliente, robo, roboDisponivel, locacao);
+                consultaLocacaoUI.setTitle("Consulta de locações");
+                consultaLocacaoUI.setSize(800,600);
+                consultaLocacaoUI.setModal(true);
+                consultaLocacaoUI.setVisible(true);
             }
         });
 

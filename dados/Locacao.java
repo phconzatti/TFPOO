@@ -110,4 +110,13 @@ public class Locacao {
 				", totalDias=" + totalDias +
 				", situacao=" + situacao+"\n";
 	}
+
+	public String toString2(){
+		return "Número="+numero+
+				", cliente=" + cliente +
+				", robo=" + robo +
+				", valorFinal=" + valorFinal +
+				", totalDias=" + totalDias +
+				", situacao=" + situacao;
+	}
 }

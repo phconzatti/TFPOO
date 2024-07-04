@@ -67,4 +67,10 @@ public abstract class Robo {
 				", modelo= " + modelo +
 				", valorDiario= " + valorDiario;
 	}
+
+	public String toString2(){
+		return "id= " + id +
+				", modelo= " + modelo +
+				", valorDiario= " + valorDiario;
+	}
 }

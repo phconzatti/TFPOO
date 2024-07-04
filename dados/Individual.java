@@ -23,6 +23,10 @@ public class Individual extends Cliente {
 		return super.toString()+ " Individual, " + "CPF= " + cpf + ";\n";
 	}
 
+	public String toString2(){
+		return  super.toString2()+" Individual, " + "CPF= " + cpf;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
