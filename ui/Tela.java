@@ -77,7 +77,7 @@ public class Tela {
         relatorioGeral.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Relatorio relatorio = new Relatorio(cliente, robo);
+                Relatorio relatorio = new Relatorio(cliente, robo, locacao);
                 relatorio.setTitle("Relatório");
                 relatorio.setSize(800,600);
                 relatorio.setModal(true);

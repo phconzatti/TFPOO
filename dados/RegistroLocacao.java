@@ -16,6 +16,7 @@ public class RegistroLocacao {
 
     public boolean cadastraLocacao(Locacao locacao){
         if (lista.isEmpty()) {
+            fila.add(locacao);
             lista.add(locacao);
             return true;
         } else {
@@ -30,4 +31,21 @@ public class RegistroLocacao {
         fila.add(locacao);
         return true;
     }
+
+    public List<Locacao> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Locacao> lista) {
+        this.lista = lista;
+    }
+
+    public Queue<Locacao> getFila() {
+        return fila;
+    }
+
+    public void setFila(Queue<Locacao> fila) {
+        this.fila = fila;
+    }
+
 }

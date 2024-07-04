@@ -31,6 +31,7 @@ public class Locacao {
 	}
 
 	public double calculaValorFinal(Cliente c, Robo r) {
+		valorFinal = c.calculaDesconto(c.getQuantidadeRobos())*r.calculaLocacao(r.getDias());
 		return c.calculaDesconto(c.getQuantidadeRobos())*r.calculaLocacao(r.getDias());
 	}
 
@@ -82,11 +83,11 @@ public class Locacao {
 		this.dataFim = dataFim;
 	}
 
-	public Cliente getcLiente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setcLiente(Cliente cLiente) {
+	public void setCliente(Cliente cLiente) {
 		this.cliente = cLiente;
 	}
 
@@ -98,10 +99,14 @@ public class Locacao {
 		this.robo = robo;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Locacao{" +
-				"valorFinal=" + valorFinal +
+				"cliente=" + cliente +
+				", robo=" + robo +
+				", valorFinal=" + valorFinal +
 				", totalDias=" + totalDias +
 				", numero=" + numero +
 				", situacao=" + situacao +

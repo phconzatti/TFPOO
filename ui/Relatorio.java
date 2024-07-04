@@ -1,13 +1,11 @@
 package ui;
 
-import dados.Cliente;
-import dados.RegistroCliente;
-import dados.RegistroRobo;
-import dados.Robo;
+import dados.*;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
+import java.util.Queue;
 
 public class Relatorio extends JDialog {
     private JPanel contentPane;
@@ -15,7 +13,7 @@ public class Relatorio extends JDialog {
     private JTextArea relatorio;
     private JButton imprimir;
 
-    public Relatorio(RegistroCliente cliente, RegistroRobo robo) {
+    public Relatorio(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -42,7 +40,14 @@ public class Relatorio extends JDialog {
                 }
                 String exibir2 = sb2.toString();
 
-                relatorio.setText("Clientes: \n"+exibir+"\nRobôs: \n"+exibir2);
+                List<Locacao> reg3 = locacao.getLista();
+                StringBuilder sb3 = new StringBuilder();
+                for (Locacao l : reg3){
+                    sb3.append(l);
+                }
+                String exibir3 = sb3.toString();
+
+                relatorio.setText("Clientes: \n"+exibir+"\nRobôs: \n"+exibir2+"\nLocações: \n"+exibir3);
             }
         });
 
@@ -67,7 +72,8 @@ public class Relatorio extends JDialog {
     public static void main(String[] args) {
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
-        Relatorio dialog = new Relatorio(rc, rb);
+        RegistroLocacao rl = new RegistroLocacao();
+        Relatorio dialog = new Relatorio(rc, rb, rl);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
