@@ -99,7 +99,7 @@ public class Tela {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SalvarUI salvarUI = new SalvarUI(cliente, robo, locacao);
+                SalvarUI salvarUI = new SalvarUI(cliente, robo, locacao, roboDisponivel);
                 salvarUI.setTitle("Salvar dados");
                 salvarUI.setSize(800,600);
                 salvarUI.setModal(true);

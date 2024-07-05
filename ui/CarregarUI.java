@@ -56,7 +56,21 @@ public class CarregarUI extends JDialog {
                     List<Robo> roboLista = gson.fromJson(reader1, roboListType);
                     for (int i = 0; i < roboLista.size(); i++) {
                         robo.cadastraRobo(roboLista.get(i));
-                        roboDisponivel.cadastraRobo(roboLista.get(i));
+                    }
+
+                    FileReader reader4 = new FileReader(nome+"-ROBOSDISPONIVEIS.json");
+                    RuntimeTypeAdapterFactory<Robo> runtimeTypeAdapterFactory4 = RuntimeTypeAdapterFactory
+                            .of(Robo.class, "tipo")
+                            .registerSubtype(Domestico.class, "1")
+                            .registerSubtype(Industrial.class, "2")
+                            .registerSubtype(Agricola.class, "3");
+                    Gson gson4 = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory4)
+                            .create();
+                    java.lang.reflect.Type roboListType4 = new TypeToken<List<Robo>>() {
+                    }.getType();
+                    List<Robo> roboLista4 = gson4.fromJson(reader4, roboListType4);
+                    for (int i = 0; i < roboLista4.size(); i++) {
+                        roboDisponivel.cadastraRobo(roboLista4.get(i));
                     }
 
                     FileReader reader2 = new FileReader(nome+"-LOCACAO.json");
@@ -66,7 +80,7 @@ public class CarregarUI extends JDialog {
                             .create();
                     java.lang.reflect.Type locacaoListType = new TypeToken<List<Locacao>>() {
                     }.getType();
-                    List<Locacao> locacaoLista = gson.fromJson(reader2, locacaoListType);
+                    List<Locacao> locacaoLista = gson3.fromJson(reader2, locacaoListType);
                     for (int i = 0; i < locacaoLista.size(); i++) {
                         locacao.cadastraLocacao(locacaoLista.get(i));
                     }

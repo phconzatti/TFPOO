@@ -9,7 +9,7 @@ public class Locacao {
 
 	private int robo;
 
-	private double valorFinal;
+	private double valorFinal, valorRobo;
 
 	private int totalDias;
 

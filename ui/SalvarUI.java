@@ -17,7 +17,7 @@ public class SalvarUI extends JDialog {
     private JTextArea exibeDados;
     private String arquivoNome = null;
 
-    public SalvarUI(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao) {
+    public SalvarUI(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao, RegistroRobo roboDisponivel) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -47,10 +47,18 @@ public class SalvarUI extends JDialog {
                     try (FileWriter writer = new FileWriter(arquivoNome + "-LOCACAO.json")) {
                     writer.write(json3);
                     } catch (IOException h) {
-                    h.printStackTrace();
+                        h.printStackTrace();
+                    }
+                    List<Robo> salvaRobo2 = roboDisponivel.organizarLista();
+                    Gson gson4 = new Gson();
+                    String json4 = gson.toJson(salvaRobo2);
+                    try (FileWriter writer = new FileWriter(arquivoNome + "-ROBOSDISPONIVEIS.json")) {
+                    writer.write(json4);
+                    } catch (IOException h) {
+                        h.printStackTrace();
                     }
                     exibeDados.append("Dados salvos com sucesso!");
-                }
+            }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
@@ -78,10 +86,11 @@ public class SalvarUI extends JDialog {
     }
 
     public static void main(String[] args) {
+        RegistroRobo rd = new RegistroRobo();
         RegistroLocacao rl = new RegistroLocacao();
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
-        SalvarUI dialog = new SalvarUI(rc, rb, rl);
+        SalvarUI dialog = new SalvarUI(rc, rb, rl,rd);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
