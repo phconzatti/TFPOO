@@ -31,6 +31,17 @@ public class Tela {
         robo = new RegistroRobo();
         locacao = new RegistroLocacao();
 
+        processaLocacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProcessaLocacaoUI processaLocacaoUI = new ProcessaLocacaoUI(locacao);
+                processaLocacaoUI.setTitle("Processar as locações");
+                processaLocacaoUI.setSize(800,600);
+                processaLocacaoUI.setModal(true);
+                processaLocacaoUI.setVisible(true);
+            }
+        });
+
         alteraLocacao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

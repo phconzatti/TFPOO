@@ -18,22 +18,26 @@ public class ConsultaLocacaoUI extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (locacao.getLista().isEmpty()){
+                    exibeDados.setText("ERRO! Nenhuma locação registrada.");
+                } else {
 
-                StringBuilder sb = new StringBuilder();
-                for (Locacao l : locacao.getLista()){
-                    sb.append(l.toString2()+", ");
-                    for (Cliente c : cliente.getLista()){
-                        if (c.getNome().equalsIgnoreCase(l.getCliente())){
-                            sb.append(c.toString2()+", ");
+                    StringBuilder sb = new StringBuilder();
+                    for (Locacao l : locacao.getLista()) {
+                        sb.append(l.toString2() + ", ");
+                        for (Cliente c : cliente.getLista()) {
+                            if (c.getNome().equalsIgnoreCase(l.getCliente())) {
+                                sb.append(c.toString2() + ", ");
+                            }
+                        }
+                        for (Robo r : robo.getLista()) {
+                            if (r.getId() == l.getRobo()) {
+                                sb.append(r.toString2() + ";\n");
+                            }
                         }
                     }
-                    for (Robo r : robo.getLista()){
-                        if (r.getId() == l.getRobo()){
-                            sb.append(r.toString2()+";\n");
-                        }
-                    }
+                    exibeDados.setText(sb.toString());
                 }
-                exibeDados.setText(sb.toString());
             }
         });
 

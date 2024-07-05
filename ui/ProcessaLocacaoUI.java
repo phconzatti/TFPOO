@@ -1,22 +1,44 @@
 package ui;
 
+import dados.Locacao;
+import dados.RegistroLocacao;
+import dados.Status;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProcessaLocacaoUI extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextArea exibeDados;
 
-    public ProcessaLocacaoUI() {
+    public ProcessaLocacaoUI(RegistroLocacao locacao) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                List<Locacao> executadas = new ArrayList<>();
+                if (locacao.getFila().isEmpty()){
+                    exibeDados.setText("Nenuma locação realizada.");
+                } else {
+                    while (!locacao.getFila().isEmpty()) {
+                        Locacao l = locacao.getFila().poll();
+                        l.setSituacao(Status.EXECUTANDO);
+                        executadas.add(l);
+                    }
+                    locacao.setLista(executadas);
+                    for (Locacao lo : locacao.getLista()) {
+                        locacao.getFila().add(lo);
+                    }
+                    exibeDados.setText("Locações executadas.");
+                }
             }
+
         });
 
         buttonCancel.addActionListener(new ActionListener() {
@@ -40,12 +62,12 @@ public class ProcessaLocacaoUI extends JDialog {
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
     public static void main(String[] args) {
-        ProcessaLocacaoUI dialog = new ProcessaLocacaoUI();
+        RegistroLocacao rl = new RegistroLocacao();
+        ProcessaLocacaoUI dialog = new ProcessaLocacaoUI(rl);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

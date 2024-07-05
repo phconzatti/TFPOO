@@ -25,28 +25,32 @@ public class RelatorioUI extends JDialog {
         imprimir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Cliente> reg = cliente.organizarLista();
-                StringBuilder sb = new StringBuilder();
-                for (Cliente c : reg){
-                    sb.append(c);
-                }
-                String exibir = sb.toString();
+                if (cliente.getLista().isEmpty() && robo.getLista().isEmpty() && locacao.getLista().isEmpty()){
+                    relatorio.setText("ERRO! Nenhum cadastro foi realizado.");
+                } else {
+                    List<Cliente> reg = cliente.organizarLista();
+                    StringBuilder sb = new StringBuilder();
+                    for (Cliente c : reg) {
+                        sb.append(c);
+                    }
+                    String exibir = sb.toString();
 
-                List<Robo> reg2 = robo.organizarLista();
-                StringBuilder sb2 = new StringBuilder();
-                for (Robo r : reg2){
-                    sb2.append(r);
-                }
-                String exibir2 = sb2.toString();
+                    List<Robo> reg2 = robo.organizarLista();
+                    StringBuilder sb2 = new StringBuilder();
+                    for (Robo r : reg2) {
+                        sb2.append(r);
+                    }
+                    String exibir2 = sb2.toString();
 
-                List<Locacao> reg3 = locacao.getLista();
-                StringBuilder sb3 = new StringBuilder();
-                for (Locacao l : reg3){
-                    sb3.append(l);
-                }
-                String exibir3 = sb3.toString();
+                    List<Locacao> reg3 = locacao.getLista();
+                    StringBuilder sb3 = new StringBuilder();
+                    for (Locacao l : reg3) {
+                        sb3.append(l);
+                    }
+                    String exibir3 = sb3.toString();
 
-                relatorio.setText("Clientes: \n"+exibir+"\nRobôs: \n"+exibir2+"\nLocações: \n"+exibir3);
+                    relatorio.setText("Clientes: \n" + exibir + "\nRobôs: \n" + exibir2 + "\nLocações: \n" + exibir3);
+                }
             }
         });
 
