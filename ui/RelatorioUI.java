@@ -5,15 +5,14 @@ import dados.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
-import java.util.Queue;
 
-public class Relatorio extends JDialog {
+public class RelatorioUI extends JDialog {
     private JPanel contentPane;
     private JButton buttonCancel;
     private JTextArea relatorio;
     private JButton imprimir;
 
-    public Relatorio(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao) {
+    public RelatorioUI(RegistroCliente cliente, RegistroRobo robo, RegistroLocacao locacao) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -73,7 +72,7 @@ public class Relatorio extends JDialog {
         RegistroCliente rc = new RegistroCliente();
         RegistroRobo rb = new RegistroRobo();
         RegistroLocacao rl = new RegistroLocacao();
-        Relatorio dialog = new Relatorio(rc, rb, rl);
+        RelatorioUI dialog = new RelatorioUI(rc, rb, rl);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

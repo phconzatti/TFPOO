@@ -1,20 +1,10 @@
 package ui;
 
-import com.google.gson.reflect.TypeToken;
 import dados.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
-import com.poo.typeadapters.RuntimeTypeAdapterFactory;
 
 
 public class Tela {
@@ -40,6 +30,24 @@ public class Tela {
         cliente = new RegistroCliente();
         robo = new RegistroRobo();
         locacao = new RegistroLocacao();
+
+        alteraLocacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        cargaDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CargaUI cargaUI = new CargaUI(cliente, robo, roboDisponivel, locacao);
+                cargaUI.setTitle("Carregar dados iniciais");
+                cargaUI.setSize(800,600);
+                cargaUI.setModal(true);
+                cargaUI.setVisible(true);
+            }
+        });
 
         consultaLocacao.addActionListener(new ActionListener() {
             @Override
@@ -88,11 +96,11 @@ public class Tela {
         relatorioGeral.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Relatorio relatorio = new Relatorio(cliente, robo, locacao);
-                relatorio.setTitle("Relatório");
-                relatorio.setSize(800,600);
-                relatorio.setModal(true);
-                relatorio.setVisible(true);
+                RelatorioUI relatorioUI = new RelatorioUI(cliente, robo, locacao);
+                relatorioUI.setTitle("Relatório");
+                relatorioUI.setSize(800,600);
+                relatorioUI.setModal(true);
+                relatorioUI.setVisible(true);
             }
         });
 
