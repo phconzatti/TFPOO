@@ -55,9 +55,19 @@ public class AlteraLocacaoUI extends JDialog {
                     exibeDados.setText("Nenhuma locação registrada.");
                 } else {
                     if (finaliza.isSelected()){
-                        locacao.getLista().get(locacaoIndex).setSituacao(Status.FINALIZADA);
+                        if (locacao.getLista().get(locacaoIndex).getSituacao() == Status.FINALIZADA || locacao.getLista().get(locacaoIndex).getSituacao() == Status.CANCELADA){
+                            exibeDados.setText("Locação não pode ser modificada.");
+                        } else {
+                            locacao.getLista().get(locacaoIndex).setSituacao(Status.FINALIZADA);
+                            exibeDados.setText("Mudança realizada com sucesso.");
+                        }
                     } else {
-                        locacao.getLista().get(locacaoIndex).setSituacao(Status.CANCELADA);
+                        if (locacao.getLista().get(locacaoIndex).getSituacao() == Status.FINALIZADA || locacao.getLista().get(locacaoIndex).getSituacao() == Status.CANCELADA){
+                            exibeDados.setText("Locação não pode ser modificada.");
+                        } else {
+                            locacao.getLista().get(locacaoIndex).setSituacao(Status.CANCELADA);
+                            exibeDados.setText("Mudança realizada com sucesso.");
+                        }
                     }
                 }
                 for (Locacao l:locacao.getLista()){
@@ -81,7 +91,6 @@ public class AlteraLocacaoUI extends JDialog {
                         }
                     }
                 }
-                exibeDados.setText("Mudança realizada com sucesso.");
             }
         });
 
