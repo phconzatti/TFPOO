@@ -28,7 +28,9 @@ public class ProcessaLocacaoUI extends JDialog {
                 } else {
                     while (!locacao.getFila().isEmpty()) {
                         Locacao l = locacao.getFila().poll();
-                        l.setSituacao(Status.EXECUTANDO);
+                        if (l.getSituacao()!=Status.CANCELADA && l.getSituacao()!=Status.FINALIZADA) {
+                            l.setSituacao(Status.EXECUTANDO);
+                        }
                         executadas.add(l);
                     }
                     locacao.setLista(executadas);

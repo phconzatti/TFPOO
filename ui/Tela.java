@@ -45,7 +45,11 @@ public class Tela {
         alteraLocacao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                AlteraLocacaoUI alteraLocacaoUI = new AlteraLocacaoUI(cliente, robo, roboDisponivel, locacao);
+                alteraLocacaoUI.setTitle("Alterar o status das locações");
+                alteraLocacaoUI.setSize(800,600);
+                alteraLocacaoUI.setModal(true);
+                alteraLocacaoUI.setVisible(true);
             }
         });
 
